@@ -5,8 +5,12 @@ import { Sequelize } from "sequelize";
 //   dialect: "mysql",
 // });
 
-const db = new Sequelize("PMO_Admin_Database", "root", "", {
-  host: "localhost",
+const db = new Sequelize({
+  host: process.env.DB_HOST,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.PORT,
   dialect: "mysql",
 });
 
