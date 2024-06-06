@@ -39,4 +39,6 @@ Aplikasi.sync();
 InfraModel.sync();
 Users.sync();
 
-app.listen(3001, () => console.log("Server running at port 5000"));
+const PORT = process.env.PORT
+
+app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
