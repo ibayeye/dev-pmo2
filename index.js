@@ -13,6 +13,10 @@ dotenv.config();
 
 const app = express();
 
+app.get('/hello', (req, res) => {
+    res.send('Hello, World!');
+});
+
 app.use((req, res, next) => {
     const clientTimezone = req.get("Client-Timezone");
     if (clientTimezone) {
