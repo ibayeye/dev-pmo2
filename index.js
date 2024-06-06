@@ -1,7 +1,7 @@
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
 import db from "./config/Database.js";
 import router from "./routes/index.js";
 import storage from "./config/Firebase.js";
@@ -27,18 +27,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
-try {
-    await db.authenticate();
-    console.log("Database Connected...");
-    console.log("Firestorage initialized " + JSON.stringify(storage));
-} catch (error) {
-    console.error(error);
-}
+const startServer = async () => {
+    try {
+        await db.authenticate();
+        console.log("Database Connected...");
+        console.log("Firestorage initialized " + JSON.stringify(storage));
+        
+        await Aplikasi.sync();
+        await InfraModel.sync();
+        await Users.sync();
+    } catch (error) {
+        console.error("Unable to connect to the database:", error);
+        process.exit(1); // Exit process with failure
+    }
 
-Aplikasi.sync();
-InfraModel.sync();
-Users.sync();
+    const PORT = process.env.PORT || 3000; // Default to port 3000 if PORT is not set
+    app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+};
 
-const PORT = process.env.PORT
-
-app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+startServer();
