@@ -41,7 +41,7 @@ const startServer = async () => {
         process.exit(1); // Exit process with failure
     }
 
-    const PORT = process.env.PORT || 3000; // Default to port 3000 if PORT is not set
+    const PORT = process.env.PORT || 3306; // Default to port 3000 if PORT is not set
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 };
 
