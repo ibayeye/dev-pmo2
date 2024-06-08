@@ -8,6 +8,7 @@ import storage from "./config/Firebase.js";
 import InfraModel from "./models/InfraModel.js";
 import Users from "./models/UserModel.js";
 import Aplikasi from "./models/Aplikasi.js";
+import Sekretariat from "./models/SekretariatModel.js";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ const startServer = async () => {
         await Aplikasi.sync();
         await InfraModel.sync();
         await Users.sync();
+        await Sekretariat.sync();
     } catch (error) {
         console.error("Unable to connect to the database:", error);
         process.exit(1); // Exit process with failure

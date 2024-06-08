@@ -6,6 +6,12 @@ const { DataTypes } = Sequelize;
 
 const Aplikasi = db.define(
     "list_aplikasi", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
         submission_title: {
             type: DataTypes.STRING,
             allowNull: false,
