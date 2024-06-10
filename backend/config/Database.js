@@ -8,11 +8,11 @@ dotenv.config();
 // });
 
 const db = new Sequelize({
-  host: process.env.DB_HOST,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
+  host: process.env.DEV_DB_HOST,
+  username: process.env.DEV_DB_USERNAME,
+  password: process.env.DEV_DB_PASSWORD,
+  database: process.env.DEV_DB_DATABASE,
+  port: process.env.DEV_DB_PORT,
   dialect: "mysql",
 });
 
