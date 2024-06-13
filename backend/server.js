@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import morgan from "morgan";
 import dotenv from "dotenv";
 import db from "./config/Database.js";
 import router from "./routes/index.js";
@@ -32,6 +33,8 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+app.use(morgan('dev'));
 
 app.use(cors());
 app.use(cookieParser());
