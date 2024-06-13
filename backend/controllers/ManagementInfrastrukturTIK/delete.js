@@ -29,10 +29,10 @@ export const deleteDataManagementInfrastrukturTIK = async(req, res) => {
         }
 
         const mergedDataProcess = {
-            ...JSON.parse(managementinfrastrukturtikDetailm.on_validation),
-            ...JSON.parse(managementinfrastrukturtikDetail.on_process),
-            ...JSON.parse(managementinfrastrukturtikDetail.on_finish),
-            ...JSON.parse(managementinfrastrukturtikDetail.fields),
+            ...JSON.parse(managementinfrastrukturtikItem.on_validation),
+            ...JSON.parse(managementinfrastrukturtikItem.on_process),
+            ...JSON.parse(managementinfrastrukturtikItem.on_finish),
+            ...JSON.parse(managementinfrastrukturtikItem.fields),
         };
         console.log("Merged Data:", mergedDataProcess);
         const findValueByTitle = (data, title) => data[title];

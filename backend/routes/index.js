@@ -60,15 +60,20 @@ import { deleteDataManagementInfrastrukturTIK } from "../controllers/ManagementI
 
 import { getListDataUptRadio } from "../controllers/UptRadio/list.js";
 import { getDetailDataUptRadio } from "../controllers/UptRadio/detail.js";
-import { editProcessDataUptRadio, setStatusDataUptRadio } from "../controllers/UptRadio/index.js";
+import {
+  editProcessDataUptRadio,
+  setStatusDataUptRadio,
+} from "../controllers/UptRadio/index.js";
 import { editDataUptRadio } from "../controllers/UptRadio/edit.js";
 import { deleteDataUptRadio } from "../controllers/UptRadio/delete.js";
 import { getListDataTeknologiSI } from "../controllers/TeknologiSI/list.js";
 import { getDetailDataTeknologiSI } from "../controllers/TeknologiSI/detail.js";
-import { editProcessDataTeknologiSI, setStatusDataTeknologiSI } from "../controllers/TeknologiSI/index.js";
+import {
+  editProcessDataTeknologiSI,
+  setStatusDataTeknologiSI,
+} from "../controllers/TeknologiSI/index.js";
 import { editDataTeknologiSI } from "../controllers/TeknologiSI/edit.js";
 import { deleteDataTeknologiSI } from "../controllers/TeknologiSI/delete.js";
-
 
 const router = express.Router();
 
@@ -89,7 +94,11 @@ router.post("/infrastruktur/list_tools", verifyToken, getListDataTools);
 router.post("/sekretariat", verifyToken, getListDataSekretariat);
 router.post("/sekretariat/detail", verifyToken, getDetailDataSekretariat);
 router.post("/sekretariat/create", verifyToken, setStatusDataSekretariat);
-router.post("/sekretariat/set_process", verifyToken, editProcessDataSekretariat);
+router.post(
+  "/sekretariat/set_process",
+  verifyToken,
+  editProcessDataSekretariat
+);
 router.post("/sekretariat/edit", verifyToken, editDataSekretariat);
 router.post("/sekretariat/delete", verifyToken, deleteDataSekretariat);
 
@@ -97,7 +106,11 @@ router.post("/sekretariat/delete", verifyToken, deleteDataSekretariat);
 router.post("/perencanaantik", verifyToken, getListDataPerencanaanTIK);
 router.post("/perencanaantik/detail", verifyToken, getDetailDataPerencanaanTIK);
 router.post("/perencanaantik/create", verifyToken, setStatusDataPerencanaanTIK);
-router.post("/perencanaantik/set_process", verifyToken, editProcessDataPerencanaanTIK);
+router.post(
+  "/perencanaantik/set_process",
+  verifyToken,
+  editProcessDataPerencanaanTIK
+);
 router.post("/perencanaantik/edit", verifyToken, editDataPerencanaanTIK);
 router.post("/perencanaantik/delete", verifyToken, deleteDataPerencanaanTIK);
 
@@ -133,7 +146,6 @@ router.post(
   deleteDataManagementInfrastrukturTIK
 );
 
-
 // Upt Radio routes
 router.post("/uptradio", verifyToken, getListDataUptRadio);
 router.post("/uptradio/detail", verifyToken, getDetailDataUptRadio);
@@ -147,11 +159,14 @@ router.post("/uptradio/list_tools", verifyToken, getListDataTools);
 router.post("/teknologisi", verifyToken, getListDataTeknologiSI);
 router.post("/teknologisi/detail", verifyToken, getDetailDataTeknologiSI);
 router.post("/teknologisi/create", verifyToken, setStatusDataTeknologiSI);
-router.post("/teknologisi/set_process", verifyToken, editProcessDataTeknologiSI);
+router.post(
+  "/teknologisi/set_process",
+  verifyToken,
+  editProcessDataTeknologiSI
+);
 router.post("/teknologisi/edit", verifyToken, editDataTeknologiSI);
 router.post("/teknologisi/delete", verifyToken, deleteDataTeknologiSI);
 router.post("/teknologisi/list_tools", verifyToken, getListDataTools);
-
 
 // Aplikasi routes
 router.post("/aplikasi", verifyToken, getListDataAplikasi);
