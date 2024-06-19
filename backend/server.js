@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import morgan from "morgan";
 import dotenv from "dotenv";
 import db from "./config/Database.js";
 import router from "./routes/index.js";
@@ -15,6 +16,7 @@ import ManagementInfrastrukturTIK from "./models/ManagementInfrastrukturTIKModel
 
 import UptRadio from "./models/UptRadioModel.js";
 import TeknologiSI from "./models/TeknologiSIModel.js";
+import PermohonanSI from "./models/PermohonanSI.js";
 
 
 dotenv.config();
@@ -32,6 +34,7 @@ app.use((req, res, next) => {
     }
     next();
 });
+app.use(morgan('dev'));
 
 app.use(cors());
 app.use(cookieParser());
@@ -46,6 +49,7 @@ const startServer = async () => {
         console.log("Firestorage initialized " + JSON.stringify(storage));
         
         await Aplikasi.sync();
+        await PermohonanSI.sync();
         await InfraModel.sync();
         await Users.sync();
         await Sekretariat.sync();

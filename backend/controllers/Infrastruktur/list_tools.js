@@ -1,6 +1,6 @@
 import ListToolsModel from "../../models/ListToolsInfra.js";
 
-export const getListDataTools = async(req, res) => {
+export const getListDataTools = async (req, res) => {
     try {
         const apiKey = req.headers["x-api-key"];
         if (!apiKey) {
@@ -11,20 +11,11 @@ export const getListDataTools = async(req, res) => {
         } else {
             const infrastruktur = await ListToolsModel.findAll();
             infrastruktur.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
             const totalItemsByStatus = {
-                divalidasi: infrastruktur.filter(
-                    (user) => user.submission_status === 2 || user.submission_status === 4
-                ).length,
-                diproses: infrastruktur.filter(
-                    (user) => user.submission_status === 6
-                ).length,
-                ditolak: infrastruktur.filter(
-                    (user) => user.submission_status === 3 || user.submission_status === 5 || user.submission_status === 8
-                ).length,
-                disetujui: infrastruktur.filter(
-                    (user) => user.submission_status === 7
-                ).length,
+                totalAlatKosong: infrastruktur.filter((item) => item.total_tools === '0' || item.total_tools === 0).length,
             };
+
             res.json({
                 status: "ok",
                 msg: "Data infrastruktur retrieved successfully",

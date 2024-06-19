@@ -1,8 +1,8 @@
 import { deleteFiles } from "../../components/UploadFile.js";
 import { deleteImage } from "../../components/UploadImage.js";
-import SekretariatModel from "../../models/SekretariatModel.js";
+import PermohonanSI from "../../models/PermohonanSI.js";
 
-export const deleteDataSekretariat = async (req, res) => {
+export const deleteDataPermohonanSI = async (req, res) => {
     try {
         const { id, layanan } = req.body;
         const apiKey = req.headers["x-api-key"];
@@ -14,13 +14,13 @@ export const deleteDataSekretariat = async (req, res) => {
             });
         }
 
-        const sekretariatItem = await SekretariatModel.findOne({
+        const permohonanSIItem = await PermohonanSI.findOne({
             where: {
                 id: id,
             },
         });
 
-        if (!sekretariatItem) {
+        if (!permohonanSIItem) {
             return res.status(404).json({
                 status: "error",
                 msg: "Item not found",
@@ -28,36 +28,39 @@ export const deleteDataSekretariat = async (req, res) => {
         }
 
         const mergedDataProcess = {
-            ...JSON.parse(sekretariatItem.on_validation),
-            ...JSON.parse(sekretariatItem.on_process),
-            ...JSON.parse(sekretariatItem.on_finish),
-            ...JSON.parse(sekretariatItem.fields),
+            ...JSON.parse(permohonanSIItem.on_validation),
+            ...JSON.parse(permohonanSIItem.feasibility_analysis),
+            ...JSON.parse(permohonanSIItem.feasibility_validation),
+            ...JSON.parse(permohonanSIItem.technical_analysis),
+            ...JSON.parse(permohonanSIItem.technical_validation),
+            ...JSON.parse(permohonanSIItem.fields),
         };
+
         console.log("Merged Data:", mergedDataProcess);
 
         const findValueByTitle = (data, title) => data[title];
 
-        const upload_dokumen_hasil_integrasiValue = findValueByTitle(mergedDataProcess, 'upload_dokumen_hasil_integrasi');
+        const technicalRecommendationLetterValue = findValueByTitle(mergedDataProcess, 'technicalRecommendationLetter');
+        const anggaranAttachmentValue = findValueByTitle(mergedDataProcess, 'anggaranAttachment');
         const file_submissionValue = findValueByTitle(mergedDataProcess, 'file_submission');
         const file_uploadValue = findValueByTitle(mergedDataProcess, 'file_upload');
 
-        const foundValue = [
-            upload_dokumen_hasil_integrasiValue,
+        const foundValues = [
+            technicalRecommendationLetterValue,
+            anggaranAttachmentValue,
             file_submissionValue,
             file_uploadValue
         ].filter(Boolean);
 
-        if (foundValue) {
-            await Promise.all(foundValue.map(async value => {
+        if (foundValues.length > 0) {
+            await Promise.all(foundValues.map(async value => {
                 await deleteFiles(value, layanan);
                 await deleteImage(value, layanan);
             }));
-            console.log("Data ditemukan dan dihapus:", foundValue, layanan);
-        } else {
-            console.log("Data tidak ditemukan");
+            console.log("Data ditemukan:", foundValues, layanan);
         }
 
-        const deletedItem = await SekretariatModel.destroy({
+        const deletedItem = await PermohonanSI.destroy({
             where: {
                 id: id,
             },
@@ -75,8 +78,8 @@ export const deleteDataSekretariat = async (req, res) => {
             });
         }
     } catch (error) {
-        console.error("Error deleting Sekretariat data:", error);
-        return res.status(500).json({
+        console.error(error);
+        res.status(500).json({
             status: "error",
             msg: "Internal Server Error",
         });

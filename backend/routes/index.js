@@ -74,6 +74,11 @@ import {
 } from "../controllers/TeknologiSI/index.js";
 import { editDataTeknologiSI } from "../controllers/TeknologiSI/edit.js";
 import { deleteDataTeknologiSI } from "../controllers/TeknologiSI/delete.js";
+import { getListDataPermohonanSI } from "../controllers/PermohonanSI/list.js";
+import { getDetailDataPermohonanSI } from "../controllers/PermohonanSI/detail.js";
+import { editProcessDataPermohonanSI, setStatusDataPermohonanSI } from "../controllers/PermohonanSI/index.js";
+import { editDataPermohonanSI } from "../controllers/PermohonanSI/edit.js";
+import { deleteDataPermohonanSI } from "../controllers/PermohonanSI/delete.js";
 
 const router = express.Router();
 
@@ -153,7 +158,6 @@ router.post("/uptradio/create", verifyToken, setStatusDataUptRadio);
 router.post("/uptradio/set_process", verifyToken, editProcessDataUptRadio);
 router.post("/uptradio/edit", verifyToken, editDataUptRadio);
 router.post("/uptradio/delete", verifyToken, deleteDataUptRadio);
-router.post("/uptradio/list_tools", verifyToken, getListDataTools);
 
 // Teknologi SI routes
 router.post("/teknologisi", verifyToken, getListDataTeknologiSI);
@@ -166,7 +170,6 @@ router.post(
 );
 router.post("/teknologisi/edit", verifyToken, editDataTeknologiSI);
 router.post("/teknologisi/delete", verifyToken, deleteDataTeknologiSI);
-router.post("/teknologisi/list_tools", verifyToken, getListDataTools);
 
 // Aplikasi routes
 router.post("/aplikasi", verifyToken, getListDataAplikasi);
@@ -175,6 +178,14 @@ router.post("/aplikasi/create", verifyToken, setStatusDataAplikasi);
 router.post("/aplikasi/set_process", verifyToken, editProcessDataAplikasi);
 router.post("/aplikasi/edit", verifyToken, editDataAplikasi);
 router.post("/aplikasi/delete", verifyToken, deleteDataAplikasi);
+
+// PErmohonan SI routes
+router.post("/permohonan-sistem-informasi", verifyToken, getListDataPermohonanSI);
+router.post("/permohonan-sistem-informasi/detail", verifyToken, getDetailDataPermohonanSI);
+router.post("/permohonan-sistem-informasi/create", verifyToken, setStatusDataPermohonanSI);
+router.post("/permohonan-sistem-informasi/set_process", verifyToken, editProcessDataPermohonanSI);
+router.post("/permohonan-sistem-informasi/edit", verifyToken, editDataPermohonanSI);
+router.post("/permohonan-sistem-informasi/delete", verifyToken, deleteDataPermohonanSI);
 
 // User routes
 router.post("/me", verifyToken, getUser);

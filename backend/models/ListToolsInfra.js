@@ -3,7 +3,7 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 const ListToolsModel = db.define(
-    "list_tools", {
+    "tools_list", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,

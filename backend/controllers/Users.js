@@ -343,7 +343,7 @@ export const checkRoleUser = async(req, res) => {
                 isDisabled: false,
             },
             {
-                value: "katim_sek",
+                value: "katim_sekre",
                 label: "Ketua Tim Pokja Sekretariat",
                 isDisabled: false,
             },
@@ -373,7 +373,7 @@ export const checkRoleUser = async(req, res) => {
                 isDisabled: false,
             },
             {
-                value: "teknis_sek",
+                value: "teknis_sekre",
                 label: "Anggota Tim Pokja Sekretariat",
                 isDisabled: false,
             },
