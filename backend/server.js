@@ -66,7 +66,7 @@ const startServer = async () => {
     }
 
 
-    const PORT = process.env.DEV_PORT; // Default to port 3000 if PORT is not set
+    const PORT = process.env.DB_PORT; // Default to port 3000 if PORT is not set
     // const PORT = process.env.DB_PORT; // Default to port 3000 if PORT is not set
 
 
